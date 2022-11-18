@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "bunnyutils",
+  "version": "${version}",
+  "name": "BunnyUtils",
+  "description": "A utility mod for BunnyFarm.",
+  "authors": ["MrSam7K", "Community?"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/bunnyutils/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.mrsam7k.bunnyutils.client.BunnyutilsClient"
+    ],
+    "main": [
+      "me.mrsam7k.bunnyutils.Bunnyutils"
+    ]
+  },
+  "mixins": [
+    "bunnyutils.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.10",
+    "fabric": "*",
+    "minecraft": "1.19"
+  }
+}
