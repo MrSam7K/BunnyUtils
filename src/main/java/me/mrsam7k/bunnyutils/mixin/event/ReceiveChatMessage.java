@@ -39,9 +39,10 @@ public abstract class ReceiveChatMessage {
 
         if (Minecraft.getInstance().player != null) {
 
-            if (message.contains(" is now ") && message.contains("! Congratulations!")) {
+            if (message.contains(" is now ") && message.contains("! Congratulations!") && !message.contains(": ") && !message.contains((CharSequence) mc.player.getName())) {
                 gg = true;
-            } else if (message.contains("The ") && message.contains("Bunny") && message.contains(" has been defeated!")) {
+            } else if (message.contains("The ") && message.contains("Bunny") && message.contains(" has been defeated!")  && !message.contains(": ")
+            ) {
                 gg = true;
             }
 
