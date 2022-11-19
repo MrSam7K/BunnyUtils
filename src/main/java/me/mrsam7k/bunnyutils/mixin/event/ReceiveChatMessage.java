@@ -2,7 +2,7 @@ package me.mrsam7k.bunnyutils.mixin.event;
 
 
 import me.mrsam7k.bunnyutils.Bunnyutils;
-import me.mrsam7k.bunnyutils.config.ConfigScreen;
+import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.util.TextUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -12,8 +12,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.io.ObjectInputFilter;
 
 
 @Mixin(ClientPacketListener.class)
@@ -32,20 +30,21 @@ public abstract class ReceiveChatMessage {
         String msgWithColor = TextUtil.textComponentToColorCodes(packet.content());
         String message = msgWithColor.replaceAll("§.", "");
         if(message.contains("Bunny Points") && message.contains("Bunny Stars")){
-            ci.cancel();
-            simplifyActionbar(msgWithColor);
+            if(Config.simplifiedActionbar) {
+                ci.cancel();
+                simplifyActionbar(msgWithColor);
+            }
             return;
         }
 
         if (Minecraft.getInstance().player != null) {
 
-            if (message.contains(" is now ") && message.contains("! Congratulations!") && !message.contains(": ") && !message.contains((CharSequence) mc.player.getName())) {
+            if (message.contains(" is now ") && message.contains("! Congratulations!") && !message.contains(": ") && !message.contains(mc.player.getName().getString())) {
                 gg = true;
             } else if (message.contains("The ") && message.contains("Bunny") && message.contains(" has been defeated!")  && !message.contains(": ")
             ) {
                 gg = true;
             }
-
             if (gg) {
                 if (Bunnyutils.lastGG) {
                     Bunnyutils.lastGG = false;
@@ -55,7 +54,7 @@ public abstract class ReceiveChatMessage {
                 if (Bunnyutils.vanished) {
                     return;
                 }
-                if(!ConfigScreen.autoGG) { return; }
+                if(!Config.autoGG) { return; }
                 mc.player.chat("GG");
 
             }
