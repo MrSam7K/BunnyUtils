@@ -2,15 +2,12 @@ package me.mrsam7k.bunnyutils.mixin.event;
 
 
 import me.mrsam7k.bunnyutils.Bunnyutils;
-import me.mrsam7k.bunnyutils.config.ConfigScreen;
 import me.mrsam7k.bunnyutils.util.TextUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,7 +18,7 @@ public abstract class ReceiveChatMessage {
 
     //@Shadow public abstract void send(Packet<?> packet);
 
-    @Inject(method = "handleSystemChat", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "handleSystemChat", at = @At("HEAD"))
     private void onChatMessage(ClientboundSystemChatPacket packet, CallbackInfo ci) {
 
         try {
@@ -32,8 +29,8 @@ public abstract class ReceiveChatMessage {
         String msgWithColor = TextUtil.textComponentToColorCodes(packet.content());
         String message = msgWithColor.replaceAll("§.", "");
         if(message.contains("Bunny Points") && message.contains("Bunny Stars")){
-            ci.cancel();
-            simplifyActionbar(msgWithColor);
+            //ci.cancel();
+            //simplifyActionbar(msgWithColor);
             return;
         }
 
