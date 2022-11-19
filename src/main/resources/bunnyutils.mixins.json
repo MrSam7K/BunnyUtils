@@ -4,9 +4,10 @@
   "package": "me.mrsam7k.bunnyutils.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "event.ReceiveChatMessage",
+    "event.SendMessage"
   ],
   "client": [
-    "event.ReceiveChatMessage"
   ],
   "injectors": {
     "defaultRequire": 1

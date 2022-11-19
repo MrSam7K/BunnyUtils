@@ -2,6 +2,7 @@ package me.mrsam7k.bunnyutils.mixin.event;
 
 
 import me.mrsam7k.bunnyutils.Bunnyutils;
+import me.mrsam7k.bunnyutils.config.ConfigScreen;
 import me.mrsam7k.bunnyutils.util.TextUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -12,13 +13,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.io.ObjectInputFilter;
+
 
 @Mixin(ClientPacketListener.class)
 public abstract class ReceiveChatMessage {
 
     //@Shadow public abstract void send(Packet<?> packet);
 
-    @Inject(method = "handleSystemChat", at = @At("HEAD"))
+    @Inject(method = "handleSystemChat", at = @At("HEAD"), cancellable = true)
     private void onChatMessage(ClientboundSystemChatPacket packet, CallbackInfo ci) {
 
         try {
@@ -29,8 +32,8 @@ public abstract class ReceiveChatMessage {
         String msgWithColor = TextUtil.textComponentToColorCodes(packet.content());
         String message = msgWithColor.replaceAll("§.", "");
         if(message.contains("Bunny Points") && message.contains("Bunny Stars")){
-            //ci.cancel();
-            //simplifyActionbar(msgWithColor);
+            ci.cancel();
+            simplifyActionbar(msgWithColor);
             return;
         }
 
@@ -52,6 +55,7 @@ public abstract class ReceiveChatMessage {
                 if (Bunnyutils.vanished) {
                     return;
                 }
+                if(!ConfigScreen.autoGG) { return; }
                 mc.player.chat("GG");
 
             }
@@ -62,7 +66,6 @@ public abstract class ReceiveChatMessage {
                 Bunnyutils.vanished = true;
             }
             if (message.contains("You are no longer vanished.")) {
-                //ConfigScreen.open();
                 Bunnyutils.vanished = false;
             }
             if (message.contains("You are now vanished.")) {
