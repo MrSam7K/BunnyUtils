@@ -5,11 +5,11 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "event.ReceiveChatMessage",
-    "event.OptionsScreen"
+    "event.OptionsScreen",
+    "event.RenderEffects",
+    "event.TablistUpdate"
   ],
-  "client": [
-
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

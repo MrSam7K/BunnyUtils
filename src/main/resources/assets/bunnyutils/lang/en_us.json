@@ -1,7 +1,8 @@
 {
   "BunnyUtils.midnightconfig.title": "Bunny Utilities Configuration",
   "BunnyUtils.midnightconfig.automationCategory": "Automation",
-  "BunnyUtils.midnightconfig.wipCategory": "Work in Progress",
-  "BunnyUtils.midnightconfig.autoGG": "Auto GG - Says auto GG after boss fight & prestige!",
-  "BunnyUtils.midnightconfig.simplifiedActionbar": "Simplified Action Bar - Keeps only numbers in action bar"
+  "BunnyUtils.midnightconfig.screenCategory": "Screen",
+  "BunnyUtils.midnightconfig.autoGG": "Auto GG - Says auto GG after boss fight & prestige",
+  "BunnyUtils.midnightconfig.bundleProgress": "Bunny Bundle Progress - Displays progress of Bunny Bundle in action bar",
+  "BunnyUtils.midnightconfig.progressDisplay" : "Tier Progress Display - Displays tier progress in bottom left corner"
 }
