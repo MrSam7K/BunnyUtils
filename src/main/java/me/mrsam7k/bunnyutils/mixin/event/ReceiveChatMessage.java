@@ -3,21 +3,26 @@ package me.mrsam7k.bunnyutils.mixin.event;
 
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import me.mrsam7k.bunnyutils.config.Config;
+import me.mrsam7k.bunnyutils.config.ITranslatable;
 import me.mrsam7k.bunnyutils.util.TextUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.concurrent.TimeUnit;
+
 
 @Mixin(ClientPacketListener.class)
-public abstract class ReceiveChatMessage {
+public abstract class ReceiveChatMessage implements ITranslatable {
 
     //@Shadow public abstract void send(Packet<?> packet);
+
+    @Shadow public abstract void cleanup();
 
     @Inject(method = "handleSystemChat", at = @At("HEAD"), cancellable = true)
     private void onChatMessage(ClientboundSystemChatPacket packet, CallbackInfo ci) {
@@ -30,9 +35,9 @@ public abstract class ReceiveChatMessage {
         String msgWithColor = TextUtil.textComponentToColorCodes(packet.content());
         String message = msgWithColor.replaceAll("§.", "");
         if(message.contains("Bunny Points") && message.contains("Bunny Stars")){
-            if(Config.simplifiedActionbar) {
+            if(Config.bundleProgress) {
                 ci.cancel();
-                simplifyActionbar(msgWithColor);
+                bunnyBundleProgress(msgWithColor);
             }
             return;
         }
@@ -60,7 +65,6 @@ public abstract class ReceiveChatMessage {
             }
 
             //Vanish checks for staff
-
             if (message.contains( mc.player.getName().getString()) && message.contains(" joined silently.")) {
                 Bunnyutils.vanished = true;
             }
@@ -74,9 +78,11 @@ public abstract class ReceiveChatMessage {
         } catch(Exception ex){System.out.println(ex);}
     }
 
-    private static void simplifyActionbar(String s){
-        Minecraft mc = Minecraft.getInstance();
-
-        mc.player.displayClientMessage(Component.nullToEmpty(s.replaceAll(" Bunny Points", "").replaceAll(" Bunny Stars", "").replaceAll(" Elixir", "")), true);
+    private static void bunnyBundleProgress(String s){
+        assert Minecraft.getInstance().player != null;
+        try {
+            int bundleProgress = (int) (Minecraft.getInstance().player.experienceProgress * 100);
+            Minecraft.getInstance().player.displayClientMessage(ITranslatable.get(s + " §8- §f" + bundleProgress + "% Bunny Bundle"), true);
+        } catch(Exception ignored){}
     }
 }
