@@ -64,14 +64,7 @@ public class ChatScreenMixin extends Screen {
             if (ScreenUtil.hovering(mouseX, mouseY, information.x1(), information.y1(), information.x2(), information.y2())) {
                 Bunnyutils.chatSelected = information.id();
 
-                List<GuiMessage<FormattedCharSequence>> trimmedMessages = ((ChatComponentMixin) minecraft.gui.getChat()).getTrimmedMessages();
-                System.out.println("\n---\n");
-                for (GuiMessage<FormattedCharSequence> message : trimmedMessages) {
-                    FormattedCharSequence msg = message.getMessage();
-
-                }
-//                trimmedMessages.add(new GuiMessage<>((int) System.currentTimeMillis(), FormattedCharSequence.forward("testing123", Style.EMPTY), 207));
-                // TODO modify the list
+                
 
                 cir.setReturnValue(true);
                 cir.cancel();
