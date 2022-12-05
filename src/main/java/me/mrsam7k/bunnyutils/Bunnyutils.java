@@ -3,9 +3,20 @@ package me.mrsam7k.bunnyutils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FormattedCharSequence;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bunnyutils implements ModInitializer {
+
+    public static final List<GuiMessage<FormattedCharSequence>> GLOBAL_CHAT = new ArrayList<>();
+    public static final List<GuiMessage<FormattedCharSequence>> PUBLIC_CHAT = new ArrayList<>();
+    public static final List<GuiMessage<FormattedCharSequence>> PRIVATE_CHAT = new ArrayList<>();
+    public static final List<GuiMessage<FormattedCharSequence>> STAFF_CHAT = new ArrayList<>();
+    public static final List<GuiMessage<FormattedCharSequence>> ADMIN_CHAT = new ArrayList<>();
 
     /**
      * 0 - GLOBAL
@@ -15,6 +26,7 @@ public class Bunnyutils implements ModInitializer {
      * 4 - ADMIN CHAT
      */
     public static int chatSelected = 0;
+
     public static boolean lastGG;
     public static boolean vanished;
     public static Component tablistFooter;
