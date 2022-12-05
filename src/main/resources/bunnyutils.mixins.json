@@ -10,6 +10,7 @@
     "event.TablistUpdate"
   ],
   "client": [
+    "ChatComponentAccessor",
     "ChatComponentMixin",
     "ChatScreenMixin"
   ],

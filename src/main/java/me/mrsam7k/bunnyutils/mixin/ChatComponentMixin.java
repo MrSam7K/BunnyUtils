@@ -3,6 +3,7 @@ package me.mrsam7k.bunnyutils.mixin;
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.gui.components.ComponentRenderUtils;
 import net.minecraft.network.chat.Component;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 @Mixin(ChatComponent.class)
-public abstract class ChatComponentMixin {
+public abstract class ChatComponentMixin extends GuiComponent {
 
     private static final String PUBLIC_REGEX = "(🌊 .+ 🌊 )?(.* )?[a-zA-Z0-9_]{3,16}: .+";
     private static final Pattern PUBLIC_PATTERN = Pattern.compile(PUBLIC_REGEX);
@@ -33,8 +34,7 @@ public abstract class ChatComponentMixin {
 
     @Shadow @Final private Minecraft minecraft;
 
-    @Accessor
-    abstract List<GuiMessage<FormattedCharSequence>> getTrimmedMessages();
+
 
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", at = @At("HEAD"))
     private void addMessage(Component component, int i, int j, boolean bl, CallbackInfo ci) {

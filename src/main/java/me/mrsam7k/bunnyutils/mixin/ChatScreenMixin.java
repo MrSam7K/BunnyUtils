@@ -64,13 +64,26 @@ public class ChatScreenMixin extends Screen {
             if (ScreenUtil.hovering(mouseX, mouseY, information.x1(), information.y1(), information.x2(), information.y2())) {
                 Bunnyutils.chatSelected = information.id();
 
-                
+                setMesssages(switch (Bunnyutils.chatSelected) {
+                    case 0 -> Bunnyutils.GLOBAL_CHAT;
+                    case 1 -> Bunnyutils.PUBLIC_CHAT;
+                    case 2 -> Bunnyutils.PRIVATE_CHAT;
+                    case 3 -> Bunnyutils.STAFF_CHAT;
+                    case 4 -> Bunnyutils.ADMIN_CHAT;
+                    default -> null;
+                });
 
                 cir.setReturnValue(true);
                 cir.cancel();
                 return;
             }
         }
+    }
+
+    private void setMesssages(List<GuiMessage<FormattedCharSequence>> messages) {
+        List<GuiMessage<FormattedCharSequence>> trimmedMessages = ((ChatComponentAccessor) minecraft.gui.getChat()).getTrimmedMessages();
+        trimmedMessages.clear();
+        if (messages != null) trimmedMessages.addAll(messages);
     }
 
 }
