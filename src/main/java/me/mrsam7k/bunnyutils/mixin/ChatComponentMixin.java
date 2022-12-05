@@ -42,6 +42,7 @@ public abstract class ChatComponentMixin extends GuiComponent {
         List<FormattedCharSequence> list = ComponentRenderUtils.wrapComponents(component, k, minecraft.font);
         addAll(Bunnyutils.GLOBAL_CHAT, list, i, j);
         String message = component.getString();
+        if (message.startsWith("Latest patch: ") || message.startsWith("Current event: ")) return;
         if (message.startsWith("[STAFF] ")) {
             addAll(Bunnyutils.STAFF_CHAT, list, i, j);
         } else if (message.startsWith("[ADMIN] ")) {
