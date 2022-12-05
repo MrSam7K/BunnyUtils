@@ -13,7 +13,6 @@
     "ChatComponentMixin",
     "ChatScreenMixin"
   ],
-  "client": [],
   "injectors": {
     "defaultRequire": 1
   }
