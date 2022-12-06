@@ -55,6 +55,8 @@ public abstract class ChatComponentMixin extends GuiComponent {
         } else if (PRIVATE_PATTERN.matcher(message).matches()) {
             addAll(Bunnyutils.PRIVATE_CHAT, list, i, j);
             if (selected != 0 && selected != 2) ci.cancel();
+        } else if (selected != 0) {
+            ci.cancel();
         }
     }
 
