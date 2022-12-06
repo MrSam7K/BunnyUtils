@@ -8,18 +8,16 @@ import net.minecraft.client.GuiMessage;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.util.FormattedCharSink;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Mixin(ChatScreen.class)
@@ -84,6 +82,17 @@ public class ChatScreenMixin extends Screen {
         List<GuiMessage<FormattedCharSequence>> trimmedMessages = ((ChatComponentAccessor) minecraft.gui.getChat()).getTrimmedMessages();
         trimmedMessages.clear();
         if (messages != null) trimmedMessages.addAll(messages);
+    }
+
+    @ModifyVariable(method = "handleChatInput", at = @At("HEAD"), ordinal = 0)
+    public String modifyChatInput(String message) {
+        if (!message.startsWith("/")) {
+            int selected = Bunnyutils.chatSelected;
+            if (selected == 2) message = "/r " + message;
+            else if (selected == 3) message = "/sc " + message;
+            else if (selected == 4) message = "/ac " + message;
+        }
+        return message;
     }
 
 }
