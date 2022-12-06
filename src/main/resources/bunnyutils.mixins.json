@@ -4,12 +4,16 @@
   "package": "me.mrsam7k.bunnyutils.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "event.ReceiveChatMessage",
     "event.OptionsScreen",
+    "event.ReceiveChatMessage",
     "event.RenderEffects",
     "event.TablistUpdate"
   ],
-  "client": [],
+  "client": [
+    "ChatComponentAccessor",
+    "ChatComponentMixin",
+    "ChatScreenMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
