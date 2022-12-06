@@ -12,7 +12,6 @@ import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,17 +27,19 @@ public abstract class ChatComponentMixin extends GuiComponent {
     private static final String PRIVATE_REGEX = "((\\[You » (.* )?[a-zA-Z0-9_]{3,16}\\] )|(\\[(.* )?[a-zA-Z0-9_]{3,16} » You] )).+";
     private static final Pattern PRIVATE_PATTERN = Pattern.compile(PRIVATE_REGEX);
 
-    @Shadow public abstract int getWidth();
+    @Shadow
+    @Final
+    private Minecraft minecraft;
 
-    @Shadow public abstract double getScale();
+    @Shadow
+    public abstract int getWidth();
 
-    @Shadow @Final private Minecraft minecraft;
-
-
+    @Shadow
+    public abstract double getScale();
 
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", at = @At("HEAD"), cancellable = true)
     private void addMessage(Component component, int i, int j, boolean bl, CallbackInfo ci) {
-        int k = Mth.floor((double)getWidth() / getScale());
+        int k = Mth.floor((double) getWidth() / getScale());
         List<FormattedCharSequence> list = ComponentRenderUtils.wrapComponents(component, k, minecraft.font);
         addAll(Bunnyutils.GLOBAL_CHAT, list, i, j);
         String message = component.getString();
