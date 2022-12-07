@@ -30,6 +30,7 @@ public class Bunnyutils implements ModInitializer {
     public static boolean lastGG;
     public static boolean vanished;
     public static Component tablistFooter;
+    public static double lastElixirExchange;
     public static String[] bfTiers = {
             "Iron I","Iron II","Iron III","Iron IV","Iron V",
             "Gold I","Gold II","Gold III","Gold IV","Gold V",

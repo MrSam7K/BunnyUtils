@@ -1,6 +1,7 @@
 package me.mrsam7k.bunnyutils.mixin.event;
 
 
+import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.config.ITranslatable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ImageButton;
@@ -24,9 +25,10 @@ public class TitleScreen extends Screen implements ITranslatable {
 
     @Inject(at = @At("RETURN"), method = "createNormalMenuOptions")
     private void addBfButton(int i, int j, CallbackInfo ci) {
-        final ResourceLocation bfButton = new ResourceLocation("bunnyutils:textures/bfbutton.png");
+        if(!Config.bfButton) return;
+        ResourceLocation bfButton = new ResourceLocation("bunnyutils:textures/bfbutton.png");
 
-        this.addRenderableWidget(new ImageButton(this.width / 2 - 100 + 205, i, 20, 20, 0, 106, 20, bfButton, 256, 256, (button) -> {
+        this.addRenderableWidget(new ImageButton(this.width / 2 - 100 + 205, i - 24, 20, 20, 0, 0, 20, bfButton, 32, 64, (button) -> {
             String address = "mcbunnyfarm.org:25565";
             ServerData serverInfo = new ServerData("BF", address, false);
             ConnectScreen.startConnecting(Minecraft.getInstance().screen, Minecraft.getInstance(), ServerAddress.parseString(address), serverInfo);

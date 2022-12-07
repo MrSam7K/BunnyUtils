@@ -2,6 +2,7 @@ package me.mrsam7k.bunnyutils.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import me.mrsam7k.bunnyutils.Bunnyutils;
+import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.util.ChatButtonInformation;
 import me.mrsam7k.bunnyutils.util.ScreenUtil;
 import net.minecraft.client.GuiMessage;
@@ -31,6 +32,8 @@ public class ChatScreenMixin extends Screen {
     @Inject(method = "render", at = @At("RETURN"))
     public void render(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (minecraft == null) return;
+        if (!Config.chatTabs) { setMesssages(Bunnyutils.GLOBAL_CHAT); return; }
+
         int offset = 0;
         buttons.clear();
         offset += chatButton(poseStack, 0, "GLOBAL", Bunnyutils.chatSelected == 0, offset);
