@@ -1,4 +1,4 @@
-package me.mrsam7k.bunnyutils.mixin.chat;
+package me.mrsam7k.bunnyutils.mixin;
 
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import net.minecraft.client.GuiMessage;
