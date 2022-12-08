@@ -2,6 +2,9 @@ package me.mrsam7k.bunnyutils;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
+import me.mrsam7k.bunnyutils.hud.HudComponent;
+import me.mrsam7k.bunnyutils.hud.HudManager;
+import me.mrsam7k.bunnyutils.hud.components.PotionsHudComponent;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
@@ -49,7 +52,12 @@ public class Bunnyutils implements ModInitializer {
     @Override
     public void onInitialize() {
         System.out.println("BunnyUtils is initializing!");
+
         MidnightConfig.init("BunnyUtils", Config.class);
+
+        HudManager manager = HudManager.getInstance();
+        manager.renderComponent(new PotionsHudComponent());
+
         System.out.println("BunnyUtils finished initializing!");
     }
 }
