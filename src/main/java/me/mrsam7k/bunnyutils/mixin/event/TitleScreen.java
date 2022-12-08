@@ -28,7 +28,7 @@ public class TitleScreen extends Screen implements ITranslatable {
         if(!Config.bfButton) return;
         ResourceLocation bfButton = new ResourceLocation("bunnyutils:textures/bfbutton.png");
 
-        this.addRenderableWidget(new ImageButton(this.width / 2 - 100 + 205, i - 24, 20, 20, 0, 0, 20, bfButton, 32, 64, (button) -> {
+        this.addRenderableWidget(new ImageButton(this.width / 2 - 100 + 205, i + 24, 20, 20, 0, 0, 20, bfButton, 32, 64, (button) -> {
             String address = "mcbunnyfarm.org:25565";
             ServerData serverInfo = new ServerData("BF", address, false);
             ConnectScreen.startConnecting(Minecraft.getInstance().screen, Minecraft.getInstance(), ServerAddress.parseString(address), serverInfo);
