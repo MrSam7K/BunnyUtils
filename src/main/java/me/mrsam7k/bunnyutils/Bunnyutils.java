@@ -3,7 +3,7 @@ package me.mrsam7k.bunnyutils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.hud.HudManager;
-import me.mrsam7k.bunnyutils.hud.components.PotionsHudComponent;
+import me.mrsam7k.bunnyutils.hud.components.TierProgressComponent;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
@@ -57,7 +57,7 @@ public class Bunnyutils implements ModInitializer {
         MidnightConfig.init("BunnyUtils", Config.class);
 
         HudManager manager = HudManager.getInstance();
-        manager.renderComponent(new PotionsHudComponent());
+        manager.renderComponent(new TierProgressComponent());
 
         System.out.println("BunnyUtils finished initializing!");
     }

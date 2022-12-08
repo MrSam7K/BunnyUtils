@@ -13,6 +13,7 @@ public final class HudRenderer implements HudRenderCallback {
     public void onHudRender(PoseStack matrixStack, float tickDelta) {
         for (HudComponent component : HudManager.getInstance().getComponents()) {
             List<HudObject> objects = component.render(tickDelta);
+            if (objects.isEmpty()) continue;
             int x = component.getX() + 2;
             int y = component.getY() + 2;
             int largestWidth = 0;
