@@ -17,7 +17,7 @@ public final class HudRenderer implements HudRenderCallback {
             int y = component.getY() + 2;
             int largestWidth = 0;
             for (HudObject object : objects) {
-                IntPair pair = object.getDimensions(matrixStack, tickDelta, x, y);
+                IntPair pair = object.getDimensions();
                 if (pair.first_integer() > largestWidth) largestWidth = pair.first_integer();
                 y += pair.second_integer() + 1;
             }

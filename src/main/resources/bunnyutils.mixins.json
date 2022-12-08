@@ -13,7 +13,8 @@
   "client": [
     "ChatComponentAccessor",
     "ChatComponentMixin",
-    "ChatScreenMixin"
+    "ChatScreenMixin",
+    "MidnightConfigMixin"
   ],
   "injectors": {
     "defaultRequire": 1

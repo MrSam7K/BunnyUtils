@@ -1,5 +1,7 @@
 {
+  "bunnyutils.config.gui_locations": "Edit GUI Locations",
   "BunnyUtils.midnightconfig.title": "Bunny Utilities Configuration",
+  "BunnyUtils.midnightconfig.fillerComment": "",
   "BunnyUtils.midnightconfig.automationCategory": "Automation",
   "BunnyUtils.midnightconfig.screenCategory": "Screen",
   "BunnyUtils.midnightconfig.miscCategory": "Miscellaneous",

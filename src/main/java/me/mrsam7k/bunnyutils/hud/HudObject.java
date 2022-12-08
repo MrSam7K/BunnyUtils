@@ -5,7 +5,7 @@ import me.mrsam7k.bunnyutils.util.IntPair;
 
 public abstract class HudObject {
 
-    public abstract IntPair getDimensions(PoseStack matrices, float tickDelta, int x, int y);
+    public abstract IntPair getDimensions();
 
     public abstract IntPair render(PoseStack matrices, float tickDelta, int x, int y);
 

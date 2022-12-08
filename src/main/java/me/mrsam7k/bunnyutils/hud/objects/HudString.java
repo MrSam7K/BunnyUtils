@@ -16,18 +16,16 @@ public class HudString extends HudObject {
     }
 
     @Override
-    public IntPair getDimensions(PoseStack matrices, float tickDelta, int x, int y) {
+    public IntPair getDimensions() {
         Minecraft minecraft = Minecraft.getInstance();
         Font font = minecraft.font;
         int width = 0;
         if (string.contains("&")) {
-            int currentX = x;
             String[] parts = string.split("&");
             parts[0] = "f" + parts[0];
             for (String part : parts) {
                 String textSegment = part.substring(1);
                 int segmentWidth = font.width(textSegment);
-                currentX += segmentWidth;
                 width += segmentWidth;
             }
         } else {

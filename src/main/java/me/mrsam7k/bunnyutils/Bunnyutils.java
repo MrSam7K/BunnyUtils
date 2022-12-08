@@ -2,7 +2,6 @@ package me.mrsam7k.bunnyutils;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
-import me.mrsam7k.bunnyutils.hud.HudComponent;
 import me.mrsam7k.bunnyutils.hud.HudManager;
 import me.mrsam7k.bunnyutils.hud.components.PotionsHudComponent;
 import net.fabricmc.api.ModInitializer;
@@ -48,6 +47,8 @@ public class Bunnyutils implements ModInitializer {
             "Divinity ☁","Divinity ☁☁","Divinity ☁☁☁","Divinity ☁☁☁☁","Divinity ☁☁☁☁☁",
 
     };
+
+    public static boolean movingComponents = false;
 
     @Override
     public void onInitialize() {

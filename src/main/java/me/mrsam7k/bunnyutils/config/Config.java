@@ -4,6 +4,9 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.client.gui.screens.Screen;
 
 public class Config extends MidnightConfig {
+
+    @Comment(centered = true) public static Comment fillerComment;
+
     @Comment(centered = true) public static Comment automationCategory;
     @Entry public static boolean autoGG = false;
 
