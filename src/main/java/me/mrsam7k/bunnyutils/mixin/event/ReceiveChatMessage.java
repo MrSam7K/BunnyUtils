@@ -30,13 +30,14 @@ public abstract class ReceiveChatMessage implements ITranslatable {
         String msgWithColor = TextUtil.textComponentToColorCodes(packet.content());
         String message = msgWithColor.replaceAll("§.", "");
         if(message.contains("Bunny Points") && message.contains("Bunny Stars")){
-            if(Config.bundleProgress) {
+            Bunnyutils.actionBar = msgWithColor;
+            if(Config.bundleProgress == Config.bundleOptions.ACTION_BAR) {
                 ci.cancel();
                 bunnyBundleProgress(msgWithColor);
             }
             if(Config.elixirExchangeNotif) elixirExchangeNotif(msg);
             return;
-        }
+        } else Bunnyutils.actionBar = "";
 
         if (Minecraft.getInstance().player != null) {
 
