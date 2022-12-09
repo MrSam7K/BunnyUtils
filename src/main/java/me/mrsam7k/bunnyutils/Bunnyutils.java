@@ -1,16 +1,20 @@
 package me.mrsam7k.bunnyutils;
 
+import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bunnyutils implements ModInitializer {
+
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final List<GuiMessage<FormattedCharSequence>> GLOBAL_CHAT = new ArrayList<>();
     public static final List<GuiMessage<FormattedCharSequence>> PUBLIC_CHAT = new ArrayList<>();
@@ -48,8 +52,8 @@ public class Bunnyutils implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        System.out.println("BunnyUtils is initializing!");
+        LOGGER.info("BunnyUtils is initializing!");
         MidnightConfig.init("BunnyUtils", Config.class);
-        System.out.println("BunnyUtils finished initializing!");
+        LOGGER.info("BunnyUtils finished initializing!");
     }
 }
