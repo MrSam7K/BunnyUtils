@@ -4,7 +4,6 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.hud.HudManager;
 import me.mrsam7k.bunnyutils.hud.components.BunnyBundleComponent;
-import me.mrsam7k.bunnyutils.hud.components.PotionDisplayComponent;
 import me.mrsam7k.bunnyutils.hud.components.TierProgressComponent;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.GuiMessage;

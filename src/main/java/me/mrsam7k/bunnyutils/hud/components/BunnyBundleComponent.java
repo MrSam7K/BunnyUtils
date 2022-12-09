@@ -20,9 +20,11 @@ public class BunnyBundleComponent extends HudComponent {
     @Override
     public List<HudObject> render(float tickDelta) {
         if(Config.bundleProgress != Config.bundleOptions.WINDOW) return new ArrayList<>();
+        if(Minecraft.getInstance().player == null) return new ArrayList<>();
+
         String s = Bunnyutils.actionBar;
         String string;
-        assert Minecraft.getInstance().player != null;
+
         if(Minecraft.getInstance().player.experienceLevel > 0){
             String bunny = Minecraft.getInstance().player.experienceLevel == 1 ? " Bunny " : " Bunnies ";
             string = "§f" + Minecraft.getInstance().player.experienceLevel + bunny + "Left";
