@@ -39,24 +39,37 @@ public class TierProgressComponent extends HudComponent {
         if (!Config.progressDisplay) return new ArrayList<>();
 
         Component tablistFooter = Bunnyutils.tablistFooter;
-        if (tablistFooter == null) return new ArrayList<>();
+        if (tablistFooter == null) return Arrays.asList(
+                new HudString("&7Your tier: &cUNKNOWN"),
+                new HudString("&7Next tier: &cUNKNOWN")
+        );
 
         String[] footer = tablistFooter.getString().split("\n");
-        if (footer.length < 2) return new ArrayList<>();
+        if (footer.length < 2) return Arrays.asList(
+                new HudString("&7Your tier: &cUNKNOWN"),
+                new HudString("&7Next tier: &cUNKNOWN")
+        );
 
         String currentTier = footer[1].split(": ")[1];
         String percentage;
         int nextTierNum;
         String nextTier;
         if (!currentTier.equals("Divinity ☁☁☁☁☁")) {
-            if (footer.length < 4) return new ArrayList<>();
-
-            String[] percentageParts = footer[3].split(" ");
-            if (percentageParts.length < 2) return new ArrayList<>();
-
-            percentage = percentageParts[1];
             nextTierNum = findIndex(Bunnyutils.bfTiers, currentTier) + 1;
             nextTier = nextTierNum == -1 ? "Failed to load" : Bunnyutils.bfTiers[nextTierNum];
+
+            if (footer.length < 4) return Arrays.asList(
+                    new HudString("&7" + footer[1].replaceAll(": ", ": &e")),
+                    new HudString("&7Next tier: &e" + nextTier)
+            );
+
+            String[] percentageParts = footer[3].split(" ");
+            if (percentageParts.length < 2) return Arrays.asList(
+                    new HudString("&7" + footer[1].replaceAll(": ", ": &e")),
+                    new HudString("&7Next tier: &e" + nextTier)
+            );
+
+            percentage = percentageParts[1];
         } else {
             percentage = " ";
             nextTier = "&6MAXED";
