@@ -79,6 +79,8 @@ public class EditGuiLocationScreen extends Screen {
 
             for (HudComponent component : HudManager.getInstance().getComponents()) {
                 List<HudObject> objects = component.render(delta);
+                if (objects.isEmpty()) continue;
+                
                 int x = component.getX() + 2;
                 int y = component.getY() + 2;
                 int largestWidth = 0;
