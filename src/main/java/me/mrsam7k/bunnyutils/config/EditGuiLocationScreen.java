@@ -59,6 +59,8 @@ public class EditGuiLocationScreen extends Screen {
             }
         }
 
+        currentlyMoving = null;
+
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
