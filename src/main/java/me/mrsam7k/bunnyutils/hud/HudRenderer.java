@@ -1,10 +1,12 @@
 package me.mrsam7k.bunnyutils.hud;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.util.IntPair;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.gui.GuiComponent;
 
+import java.awt.*;
 import java.util.List;
 
 public final class HudRenderer implements HudRenderCallback {
@@ -22,6 +24,7 @@ public final class HudRenderer implements HudRenderCallback {
                 if (pair.first_integer() > largestWidth) largestWidth = pair.first_integer();
                 y += pair.second_integer() + 1;
             }
+            int hex = Color.HSBtoRGB(0, 0, Config.intSlider);
             GuiComponent.fill(matrixStack, component.getX(), component.getY(), x + largestWidth + 1, y, 0xBF000000);
             x = component.getX() + 2;
             y = component.getY() + 2;
