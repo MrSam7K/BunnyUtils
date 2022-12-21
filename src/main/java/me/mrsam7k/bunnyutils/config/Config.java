@@ -20,7 +20,7 @@ public class Config extends MidnightConfig {
 
     @Comment(centered = true) public static Comment miscCategory;
     @Entry public static boolean elixirExchangeNotif = false;
-    @Entry(name = "Adjust Background Opacity", isSlider = true, min = 0, max = 100) public static int intSlider = 50;
+    @Entry(name = "Adjust Overlay Background Opacity", isSlider = true, min = 0, max = 100) public static int intSlider = 50;
 
     public static Screen getScreen(Screen parent){
         return MidnightConfig.getScreen(parent, "BunnyUtils");

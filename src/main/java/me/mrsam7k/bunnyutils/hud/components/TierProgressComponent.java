@@ -26,7 +26,7 @@ public class TierProgressComponent extends HudComponent {
         }
         int i = 0;
         for (String entry : arr) {
-            if (Objects.equals(entry, t.replaceAll("§.", ""))) {
+            if (Objects.equals(entry.replaceAll("§.", ""), t.replaceAll("§.", ""))) {
                 return i;
             }
             i++;
