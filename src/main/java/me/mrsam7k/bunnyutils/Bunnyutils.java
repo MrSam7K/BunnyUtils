@@ -3,6 +3,7 @@ package me.mrsam7k.bunnyutils;
 import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
+import me.mrsam7k.bunnyutils.socket.SocketHandler;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
@@ -16,11 +17,11 @@ public class Bunnyutils implements ModInitializer {
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final List<GuiMessage<FormattedCharSequence>> GLOBAL_CHAT = new ArrayList<>();
-    public static final List<GuiMessage<FormattedCharSequence>> PUBLIC_CHAT = new ArrayList<>();
-    public static final List<GuiMessage<FormattedCharSequence>> PRIVATE_CHAT = new ArrayList<>();
-    public static final List<GuiMessage<FormattedCharSequence>> STAFF_CHAT = new ArrayList<>();
-    public static final List<GuiMessage<FormattedCharSequence>> ADMIN_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> GLOBAL_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> PUBLIC_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> PRIVATE_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> STAFF_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> ADMIN_CHAT = new ArrayList<>();
 
     /**
      * 0 - GLOBAL

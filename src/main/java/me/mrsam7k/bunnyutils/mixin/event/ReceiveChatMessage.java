@@ -56,7 +56,7 @@ public abstract class ReceiveChatMessage implements ITranslatable {
                     return;
                 }
                 if(!Config.autoGG) { return; }
-                mc.player.chat("GG");
+                mc.player.chatSigned("GG", null);
 
             }
 

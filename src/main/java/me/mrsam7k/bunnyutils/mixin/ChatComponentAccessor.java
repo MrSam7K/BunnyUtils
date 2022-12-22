@@ -12,6 +12,6 @@ import java.util.List;
 public interface ChatComponentAccessor {
 
     @Accessor
-    List<GuiMessage<FormattedCharSequence>> getTrimmedMessages();
+    List<GuiMessage.Line> getTrimmedMessages();
 
 }

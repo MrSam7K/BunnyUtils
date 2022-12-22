@@ -80,8 +80,8 @@ public class ChatScreenMixin extends Screen {
         }
     }
 
-    private void setMesssages(List<GuiMessage<FormattedCharSequence>> messages) {
-        List<GuiMessage<FormattedCharSequence>> trimmedMessages = ((ChatComponentAccessor) minecraft.gui.getChat()).getTrimmedMessages();
+    private void setMesssages(List<GuiMessage.Line> messages) {
+        List<GuiMessage.Line> trimmedMessages = ((ChatComponentAccessor) minecraft.gui.getChat()).getTrimmedMessages();
         trimmedMessages.clear();
         if (messages != null) trimmedMessages.addAll(messages);
     }

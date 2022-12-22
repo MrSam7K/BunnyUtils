@@ -2,11 +2,13 @@ package me.mrsam7k.bunnyutils.mixin;
 
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import net.minecraft.client.GuiMessage;
+import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.client.gui.components.ComponentRenderUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MessageSignature;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Final;
@@ -37,33 +39,35 @@ public abstract class ChatComponentMixin extends GuiComponent {
     @Shadow
     public abstract double getScale();
 
-    @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;IIZ)V", at = @At("HEAD"), cancellable = true)
-    private void addMessage(Component component, int i, int j, boolean bl, CallbackInfo ci) {
+    @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V", at = @At("HEAD"), cancellable = true)
+    private void addMessage(Component component, MessageSignature messageSignature, int i, GuiMessageTag guiMessageTag, boolean bl, CallbackInfo ci) {
         int k = Mth.floor((double) getWidth() / getScale());
         List<FormattedCharSequence> list = ComponentRenderUtils.wrapComponents(component, k, minecraft.font);
-        addAll(Bunnyutils.GLOBAL_CHAT, list, i, j);
+        addAll(Bunnyutils.GLOBAL_CHAT, list, guiMessageTag, i);
         String message = component.getString();
         int selected = Bunnyutils.chatSelected;
         if (message.startsWith("[STAFF] ")) {
-            addAll(Bunnyutils.STAFF_CHAT, list, i, j);
+            addAll(Bunnyutils.STAFF_CHAT, list, guiMessageTag, i);
             if (selected != 0 && selected != 3) ci.cancel();
         } else if (message.startsWith("[ADMIN] ")) {
-            addAll(Bunnyutils.ADMIN_CHAT, list, i, j);
+            addAll(Bunnyutils.ADMIN_CHAT, list, guiMessageTag, i);
             if (selected != 0 && selected != 4) ci.cancel();
         } else if (!(message.startsWith("Latest patch") || message.startsWith("Current event")) && PUBLIC_PATTERN.matcher(message).matches()) {
-            addAll(Bunnyutils.PUBLIC_CHAT, list, i, j);
+            addAll(Bunnyutils.PUBLIC_CHAT, list, guiMessageTag, i);
             if (selected != 0 && selected != 1) ci.cancel();
         } else if (PRIVATE_PATTERN.matcher(message).matches()) {
-            addAll(Bunnyutils.PRIVATE_CHAT, list, i, j);
+            addAll(Bunnyutils.PRIVATE_CHAT, list, guiMessageTag, i);
             if (selected != 0 && selected != 2) ci.cancel();
         } else if (selected != 0) {
             ci.cancel();
         }
     }
 
-    private void addAll(List<GuiMessage<FormattedCharSequence>> addTo, List<FormattedCharSequence> toAdd, int i, int j) {
+    private void addAll(List<GuiMessage.Line> addTo, List<FormattedCharSequence> toAdd, GuiMessageTag messageTag, int addedTime) {
+        int i = 0;
         for (FormattedCharSequence adding : toAdd) {
-            addTo.add(0, new GuiMessage<>(j, adding, i));
+            i++;
+            addTo.add(0, new GuiMessage.Line(addedTime, adding, messageTag, i == toAdd.size()));
         }
     }
 
