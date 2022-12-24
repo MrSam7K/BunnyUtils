@@ -14,11 +14,14 @@ import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Bunnyutils implements ModInitializer {
 
     public static final Gson GSON = new Gson();
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final List<UUID> PLAYERS_WITH_MOD = new ArrayList<>();
 
     public static final List<GuiMessage.Line> GLOBAL_CHAT = new ArrayList<>();
     public static final List<GuiMessage.Line> PUBLIC_CHAT = new ArrayList<>();
