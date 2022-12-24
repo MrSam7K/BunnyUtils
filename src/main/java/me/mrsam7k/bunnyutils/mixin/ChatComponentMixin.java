@@ -1,6 +1,9 @@
 package me.mrsam7k.bunnyutils.mixin;
 
 import me.mrsam7k.bunnyutils.Bunnyutils;
+import me.mrsam7k.bunnyutils.config.Config;
+import me.mrsam7k.bunnyutils.socket.SocketHandler;
+import me.mrsam7k.bunnyutils.util.MessageUtil;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.Minecraft;
@@ -47,11 +50,16 @@ public abstract class ChatComponentMixin extends GuiComponent {
         if (message.startsWith("§bYour API key has been updated to §3") && message.endsWith("§b. §8[§a§lCLICK§8]")) {
             Config.apiKey = message.split("(to )|(\\. )")[1].replaceAll("§.", "");
             MessageUtil.sendMessageWithPrefix("Detected new API key from chat.");
+
+            if (!SocketHandler.connected) {
+                // If haven't connected to socket yet, attempt to connect now that we have the API key.
+                new SocketHandler();
+            }
         }
+
         int k = Mth.floor((double) getWidth() / getScale());
         List<FormattedCharSequence> list = ComponentRenderUtils.wrapComponents(component, k, minecraft.font);
         addAll(Bunnyutils.GLOBAL_CHAT, list, guiMessageTag, i);
-        String message = component.getString();
         int selected = Bunnyutils.chatSelected;
         if (message.startsWith("[STAFF] ")) {
             addAll(Bunnyutils.STAFF_CHAT, list, guiMessageTag, i);
