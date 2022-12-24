@@ -48,12 +48,12 @@ public class ChatScreenMixin extends Screen {
     private int chatButton(PoseStack poseStack, int id, String name, boolean selected, int offset) {
         int nameWidth = minecraft.font.width(name);
         int x = 2 + offset;
-        int y = this.height - 51 - minecraft.gui.getChat().getHeight();
+        int y = this.height - 15 - this.font.lineHeight;
         int x2 = 4 + nameWidth + offset;
-        int y2 = this.height + minecraft.font.lineHeight - 50 - minecraft.gui.getChat().getHeight();
+        int y2 = this.height - 14;
         fill(poseStack, x, y, x2, y2,
                 selected ? this.minecraft.options.getBackgroundColor(Integer.MIN_VALUE) / 2 : this.minecraft.options.getBackgroundColor(Integer.MIN_VALUE));
-        drawString(poseStack, minecraft.font, name, 3 + offset, this.height - 50 - minecraft.gui.getChat().getHeight(), 0xFFFFFF);
+        drawString(poseStack, minecraft.font, name, 3 + offset, y + 1, 0xFFFFFF);
 
         buttons.add(new ChatButtonInformation(id, x, y, x2, y2));
 
