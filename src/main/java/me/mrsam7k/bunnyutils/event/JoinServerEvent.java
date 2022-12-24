@@ -26,6 +26,11 @@ public class JoinServerEvent implements ClientPlayConnectionEvents.Join {
             };
             MessageUtil.sendMessages(messages);
         }
+
+        if (!SocketHandler.connected) {
+            // If haven't connected to socket yet, attempt to connect.
+            new SocketHandler();
+        }
     }
 
 }
