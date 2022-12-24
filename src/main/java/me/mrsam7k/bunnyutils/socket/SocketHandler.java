@@ -23,7 +23,7 @@ public class SocketHandler {
         try {
             socket = client.newWebSocketBuilder()
                     .buildAsync(
-                            URI.create("ws://localhost:30019/bunnyutils"),  // To test before pushing to webserver, use a localhost url
+                            URI.create("ws://kingrabbit.dev/bunnyutils"),  // To test before pushing to webserver, use a localhost url
                             new SocketListener()
                     )
                     .get();
