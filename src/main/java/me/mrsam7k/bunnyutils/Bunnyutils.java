@@ -5,6 +5,7 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.socket.SocketHandler;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
@@ -55,6 +56,8 @@ public class Bunnyutils implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("BunnyUtils is initializing!");
         MidnightConfig.init("BunnyUtils", Config.class);
+
+        ClientPlayConnectionEvents.JOIN.register(new JoinServerEvent());
         LOGGER.info("BunnyUtils finished initializing!");
     }
 }

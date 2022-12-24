@@ -41,6 +41,13 @@ public abstract class ChatComponentMixin extends GuiComponent {
 
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V", at = @At("HEAD"), cancellable = true)
     private void addMessage(Component component, MessageSignature messageSignature, int i, GuiMessageTag guiMessageTag, boolean bl, CallbackInfo ci) {
+        String message = component.getString();
+
+        Bunnyutils.LOGGER.info(message);
+        if (message.startsWith("§bYour API key has been updated to §3") && message.endsWith("§b. §8[§a§lCLICK§8]")) {
+            Config.apiKey = message.split("(to )|(\\. )")[1].replaceAll("§.", "");
+            MessageUtil.sendMessageWithPrefix("Detected new API key from chat.");
+        }
         int k = Mth.floor((double) getWidth() / getScale());
         List<FormattedCharSequence> list = ComponentRenderUtils.wrapComponents(component, k, minecraft.font);
         addAll(Bunnyutils.GLOBAL_CHAT, list, guiMessageTag, i);
