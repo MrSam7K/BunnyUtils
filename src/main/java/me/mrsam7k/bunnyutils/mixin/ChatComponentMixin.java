@@ -1,5 +1,6 @@
 package me.mrsam7k.bunnyutils.mixin;
 
+import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.socket.SocketHandler;
@@ -50,6 +51,8 @@ public abstract class ChatComponentMixin extends GuiComponent {
         if (message.startsWith("§bYour API key has been updated to §3") && message.endsWith("§b. §8[§a§lCLICK§8]")) {
             Config.apiKey = message.split("(to )|(\\. )")[1].replaceAll("§.", "");
             MessageUtil.sendMessageWithPrefix("Detected new API key from chat.");
+
+            MidnightConfig.write("BunnyUtils");
 
             if (!SocketHandler.connected) {
                 // If haven't connected to socket yet, attempt to connect now that we have the API key.
