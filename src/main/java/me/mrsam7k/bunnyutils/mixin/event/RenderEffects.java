@@ -23,7 +23,6 @@ public class RenderEffects {
     @Inject(method = "renderEffects", at = @At("RETURN"))
     private void renderEffects(PoseStack stack, CallbackInfo ci) {
         try {
-            if(Config.progressDisplay) progressDisplay(stack);
             if(Config.potionDisplay) potionDisplay(stack);
             } catch(Exception ignored){}
     }
@@ -34,40 +33,6 @@ public class RenderEffects {
         tr.drawShadow(stack, text, 4, y, 0xffffff);
     }
 
-
-    private static int findIndex(String[] arr, String t) {
-        if (arr == null) { return -1; }
-        int i = 0;
-        for(String entry : arr){
-            if(Objects.equals(entry, t.replaceAll("§.", ""))){
-                return i;
-            }
-            i++;
-        }
-        return -1;
-    }
-
-    private static void progressDisplay(PoseStack stack){
-        Font tr = Minecraft.getInstance().font;
-        String[] footer = Bunnyutils.tablistFooter.getString().split("\n");
-        String currentTier = footer[1].split(": ")[1];
-        String percentage;
-        int nextTierNum;
-        String nextTier;
-        if(!currentTier.equals("Divinity ☁☁☁☁☁")) {
-            percentage = footer[3].split(" ")[1];
-            nextTierNum = findIndex(Bunnyutils.bfTiers, currentTier) + 1;
-            nextTier = nextTierNum == -1 ?  "Failed to load" : Bunnyutils.bfTiers[nextTierNum];
-        } else {
-            percentage = " ";
-            nextTier = "None";
-        }
-
-
-        drawTextLeft(ITranslatable.get(footer[1]).copy().withStyle(ChatFormatting.GOLD), 2, tr, stack);
-        drawTextLeft(ITranslatable.get("Next tier: " + nextTier + " " + percentage).copy().withStyle(ChatFormatting.YELLOW), 1, tr, stack);
-
-    }
 
     private static void potionDisplay(PoseStack stack){
         Font tr = Minecraft.getInstance().font;
