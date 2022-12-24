@@ -1,27 +1,19 @@
 package me.mrsam7k.bunnyutils.mixin.event;
 
 
-import com.sun.jna.platform.win32.COM.util.annotation.ComObject;
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.config.ITranslatable;
-import me.mrsam7k.bunnyutils.util.SoundUtil;
 import me.mrsam7k.bunnyutils.util.TextUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSystemChatPacket;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.chunk.LevelChunk;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 
 @Mixin(ClientPacketListener.class)
@@ -38,13 +30,14 @@ public abstract class ReceiveChatMessage implements ITranslatable {
         String msgWithColor = TextUtil.textComponentToColorCodes(packet.content());
         String message = msgWithColor.replaceAll("§.", "");
         if(message.contains("Bunny Points") && message.contains("Bunny Stars")){
-            if(Config.bundleProgress) {
+            Bunnyutils.actionBar = msgWithColor;
+            if(Config.bundleProgress == Config.bundleOptions.ACTION_BAR) {
                 ci.cancel();
                 bunnyBundleProgress(msgWithColor);
             }
             if(Config.elixirExchangeNotif) elixirExchangeNotif(msg);
             return;
-        }
+        } else Bunnyutils.actionBar = "";
 
         if (Minecraft.getInstance().player != null) {
 

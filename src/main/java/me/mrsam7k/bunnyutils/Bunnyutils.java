@@ -2,6 +2,9 @@ package me.mrsam7k.bunnyutils;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
+import me.mrsam7k.bunnyutils.hud.HudManager;
+import me.mrsam7k.bunnyutils.hud.components.BunnyBundleComponent;
+import me.mrsam7k.bunnyutils.hud.components.TierProgressComponent;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
@@ -30,6 +33,8 @@ public class Bunnyutils implements ModInitializer {
     public static boolean lastGG;
     public static boolean vanished;
     public static Component tablistFooter;
+    public static Component potionEffects;
+    public static String actionBar;
     public static double lastElixirExchange;
     public static String[] bfTiers = {
             "Iron I","Iron II","Iron III","Iron IV","Iron V",
@@ -46,10 +51,19 @@ public class Bunnyutils implements ModInitializer {
 
     };
 
+    public static boolean movingComponents = false;
+
     @Override
     public void onInitialize() {
         System.out.println("BunnyUtils is initializing!");
+
         MidnightConfig.init("BunnyUtils", Config.class);
+
+        HudManager manager = HudManager.getInstance();
+        manager.renderComponent(new TierProgressComponent());
+        manager.renderComponent(new BunnyBundleComponent());
+
+
         System.out.println("BunnyUtils finished initializing!");
     }
 }
