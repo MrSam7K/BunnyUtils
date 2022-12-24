@@ -1,14 +1,15 @@
 package me.mrsam7k.bunnyutils;
 
+import com.google.gson.Gson;
 import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
+import me.mrsam7k.bunnyutils.event.JoinServerEvent;
 import me.mrsam7k.bunnyutils.socket.SocketHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.FormattedCharSequence;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class Bunnyutils implements ModInitializer {
 
+    public static final Gson GSON = new Gson();
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final List<GuiMessage.Line> GLOBAL_CHAT = new ArrayList<>();
@@ -58,6 +60,9 @@ public class Bunnyutils implements ModInitializer {
         MidnightConfig.init("BunnyUtils", Config.class);
 
         ClientPlayConnectionEvents.JOIN.register(new JoinServerEvent());
+
+        new SocketHandler();
+
         LOGGER.info("BunnyUtils finished initializing!");
     }
 }
