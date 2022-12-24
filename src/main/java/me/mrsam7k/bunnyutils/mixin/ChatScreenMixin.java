@@ -9,7 +9,6 @@ import net.minecraft.client.GuiMessage;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.FormattedCharSequence;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,7 +31,10 @@ public class ChatScreenMixin extends Screen {
     @Inject(method = "render", at = @At("RETURN"))
     public void render(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (minecraft == null) return;
-        if (!Config.chatTabs) { setMesssages(Bunnyutils.GLOBAL_CHAT); return; }
+        if (!Config.chatTabs) {
+            setMesssages(Bunnyutils.GLOBAL_CHAT);
+            return;
+        }
 
         int offset = 0;
         buttons.clear();
