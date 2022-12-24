@@ -5,6 +5,7 @@
   "BunnyUtils.midnightconfig.automationCategory": "Automation",
   "BunnyUtils.midnightconfig.screenCategory": "Screen",
   "BunnyUtils.midnightconfig.miscCategory": "Miscellaneous",
+  "BunnyUtils.midnightconfig.apiKey": "API Key",
   "BunnyUtils.midnightconfig.autoGG": "Auto GG - Says auto GG after boss fight & prestige",
   "BunnyUtils.midnightconfig.bundleProgress": "Bunny Bundle Progress - Displays progress of Bunny Bundle in action bar",
   "BunnyUtils.midnightconfig.enum.bundleOptions.OFF": "Off",

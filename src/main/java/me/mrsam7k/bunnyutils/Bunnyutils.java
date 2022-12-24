@@ -1,25 +1,36 @@
 package me.mrsam7k.bunnyutils;
 
+import com.google.gson.Gson;
+import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
+import me.mrsam7k.bunnyutils.event.JoinServerEvent;
+import me.mrsam7k.bunnyutils.socket.SocketHandler;
 import me.mrsam7k.bunnyutils.hud.HudManager;
 import me.mrsam7k.bunnyutils.hud.components.BunnyBundleComponent;
 import me.mrsam7k.bunnyutils.hud.components.TierProgressComponent;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.FormattedCharSequence;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Bunnyutils implements ModInitializer {
 
-    public static final List<GuiMessage<FormattedCharSequence>> GLOBAL_CHAT = new ArrayList<>();
-    public static final List<GuiMessage<FormattedCharSequence>> PUBLIC_CHAT = new ArrayList<>();
-    public static final List<GuiMessage<FormattedCharSequence>> PRIVATE_CHAT = new ArrayList<>();
-    public static final List<GuiMessage<FormattedCharSequence>> STAFF_CHAT = new ArrayList<>();
-    public static final List<GuiMessage<FormattedCharSequence>> ADMIN_CHAT = new ArrayList<>();
+    public static final Gson GSON = new Gson();
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final List<UUID> PLAYERS_WITH_MOD = new ArrayList<>();
+
+    public static final List<GuiMessage.Line> GLOBAL_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> PUBLIC_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> PRIVATE_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> STAFF_CHAT = new ArrayList<>();
+    public static final List<GuiMessage.Line> ADMIN_CHAT = new ArrayList<>();
 
     /**
      * 0 - GLOBAL
@@ -55,15 +66,17 @@ public class Bunnyutils implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        System.out.println("BunnyUtils is initializing!");
-
+        LOGGER.info("BunnyUtils is initializing!");
         MidnightConfig.init("BunnyUtils", Config.class);
+
+        ClientPlayConnectionEvents.JOIN.register(new JoinServerEvent());
 
         HudManager manager = HudManager.getInstance();
         manager.renderComponent(new TierProgressComponent());
         manager.renderComponent(new BunnyBundleComponent());
 
+        new SocketHandler();
 
-        System.out.println("BunnyUtils finished initializing!");
+        LOGGER.info("BunnyUtils finished initializing!");
     }
 }

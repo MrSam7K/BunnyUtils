@@ -19,6 +19,7 @@ public class Config extends MidnightConfig {
     @Entry public static boolean bfButton = true;
 
     @Comment(centered = true) public static Comment miscCategory;
+    @Entry public static String apiKey = "";
     @Entry public static boolean elixirExchangeNotif = false;
     @Entry(name = "Adjust Overlay Background Opacity", isSlider = true, min = 0, max = 100) public static int intSlider = 50;
 
