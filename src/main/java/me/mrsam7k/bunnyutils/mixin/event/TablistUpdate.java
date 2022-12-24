@@ -14,9 +14,8 @@ public class TablistUpdate implements ITranslatable {
 
     @Inject(at = @At("RETURN"), method = "setFooter")
     private void getTablist(Component component, CallbackInfo ci) {
-            Bunnyutils.tablistFooter = component;
-        }
-
+        Bunnyutils.tablistFooter = component;
+    }
 
 
 }
