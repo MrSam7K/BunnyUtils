@@ -2,7 +2,7 @@ package me.mrsam7k.bunnyutils.mixin.event;
 
 
 import me.mrsam7k.bunnyutils.config.Config;
-import me.mrsam7k.bunnyutils.config.ITranslatable;
+import me.mrsam7k.bunnyutils.util.ITranslatable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.ConnectScreen;

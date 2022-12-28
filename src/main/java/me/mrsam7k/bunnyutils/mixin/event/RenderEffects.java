@@ -3,7 +3,7 @@ package me.mrsam7k.bunnyutils.mixin.event;
 import com.mojang.blaze3d.vertex.PoseStack;
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import me.mrsam7k.bunnyutils.config.Config;
-import me.mrsam7k.bunnyutils.config.ITranslatable;
+import me.mrsam7k.bunnyutils.util.ITranslatable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Mixin(Gui.class)
 public class RenderEffects {

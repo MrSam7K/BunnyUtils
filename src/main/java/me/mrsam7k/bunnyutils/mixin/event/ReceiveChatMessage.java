@@ -3,7 +3,7 @@ package me.mrsam7k.bunnyutils.mixin.event;
 
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import me.mrsam7k.bunnyutils.config.Config;
-import me.mrsam7k.bunnyutils.config.ITranslatable;
+import me.mrsam7k.bunnyutils.util.ITranslatable;
 import me.mrsam7k.bunnyutils.util.TextUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
