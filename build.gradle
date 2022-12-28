@@ -8,11 +8,15 @@ group = project.maven_group
 
 repositories {
     maven { url = "https://api.modrinth.com/maven" }
+    maven {
+        name = "CottonMC"
+        url = "https://server.bbkr.space/artifactory/libs-release"
+    }
 }
 
 dependencies {
     //MidnightConfig
-    modImplementation "maven.modrinth:midnightlib:1.0.0-fabric"
+    modImplementation "maven.modrinth:midnightlib:${project.midnight_version}"
 
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -21,6 +25,10 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    dependencies {
+        modImplementation include("io.github.cottonmc:LibGui:${project.lib_gui_version}")
+    }
 }
 
 processResources {

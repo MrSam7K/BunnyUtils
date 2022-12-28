@@ -11,7 +11,8 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "me.mrsam7k.bunnyutils.client.BunnyutilsClient"
+      "me.mrsam7k.bunnyutils.client.BunnyutilsClient",
+      "me.mrsam7k.bunnyutils.keybinds.Keybinds"
     ],
     "main": [
       "me.mrsam7k.bunnyutils.Bunnyutils"

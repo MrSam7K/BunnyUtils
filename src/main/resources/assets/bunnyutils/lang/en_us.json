@@ -1,4 +1,5 @@
 {
+  "bunnyutils": "BunnyUtils",
   "bunnyutils.config.gui_locations": "Edit GUI Locations",
   "BunnyUtils.midnightconfig.title": "Bunny Utilities Configuration",
   "BunnyUtils.midnightconfig.fillerComment": "",
@@ -15,5 +16,8 @@
   "BunnyUtils.midnightconfig.chatTabs": "Chat Tabs",
   "BunnyUtils.midnightconfig.elixirExchangeNotif": "Elixir Exchange Notification - Sends a notification when you are able to exchange elixir",
   "BunnyUtils.midnightconfig.potionDisplay": "Potion Display - Displays active potion effects",
-  "BunnyUtils.midnightconfig.bfButton": "BunnyFarm Button - Adds button to title screen which joins BunnyFarm"
+  "BunnyUtils.midnightconfig.bfButton": "BunnyFarm Button - Adds button to title screen which joins BunnyFarm",
+
+  "key.bunnyutils.open_pv": "Open Profile Viewer",
+  "key.bunnyutils.open_config": "Open Config"
 }
