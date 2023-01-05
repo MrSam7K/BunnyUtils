@@ -91,7 +91,7 @@ public abstract class ReceiveChatMessage implements ITranslatable {
                 }
             }
         } catch (Exception ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -114,7 +114,7 @@ public abstract class ReceiveChatMessage implements ITranslatable {
     private double getElixir(String[] actionBar) {
         for (String s : actionBar) {
             if (s.contains("Elixir")) {
-                return (double) Integer.parseInt(s.replaceAll("Elixir", "").replaceAll(" ", "")) / 100;
+                return (double) Integer.parseInt(s.replaceAll("Elixir", "").replaceAll(" ", "").replaceAll(",", "")) / 100;
             }
         }
         return 0;
