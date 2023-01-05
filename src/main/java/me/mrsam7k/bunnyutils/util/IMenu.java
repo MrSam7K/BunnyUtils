@@ -6,6 +6,7 @@ import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import net.minecraft.client.Minecraft;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public interface IMenu {
     default void scheduleOpenGui(LightweightGuiDescription gui, String... args) {
@@ -17,5 +18,5 @@ public interface IMenu {
         }
     }
 
-    void open(String... args) throws CommandSyntaxException, IOException;
+    void open(String... args) throws CommandSyntaxException, IOException, InterruptedException, URISyntaxException;
 }

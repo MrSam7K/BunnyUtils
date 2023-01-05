@@ -4,7 +4,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class TextUtil {
@@ -59,5 +62,34 @@ public class TextUtil {
 
         currentText += sibling.getString();
         newMsg.append(currentText);
+    }
+
+    public static String fromTrimmed(String trimmedUUID) throws IllegalArgumentException {
+        if (trimmedUUID == null) {
+            throw new IllegalArgumentException();
+        }
+        StringBuilder builder = new StringBuilder(trimmedUUID.trim());
+        try {
+            builder.insert(20, "-");
+            builder.insert(16, "-");
+            builder.insert(12, "-");
+            builder.insert(8, "-");
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException();
+        }
+        return builder.toString();
+    }
+
+    public static String toFancyNumber(int num){
+        return NumberFormat.getInstance(Locale.US).format((Integer) num);
+    }
+
+    public static String toProperCase(String s) {
+        String[] s2 = s.split(" ");
+        ArrayList<String> list = new ArrayList<>();
+        for (String word : s2) {
+            list.add(word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase());
+        }
+        return String.join(" ", list);
     }
 }

@@ -8,7 +8,8 @@
     "event.ReceiveChatMessage",
     "event.RenderEffects",
     "event.TablistUpdate",
-    "event.TitleScreen"
+    "event.TitleScreen",
+    "event.InventoryOpen"
   ],
   "client": [
     "ChatComponentAccessor",

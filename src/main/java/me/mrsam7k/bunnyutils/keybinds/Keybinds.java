@@ -30,17 +30,17 @@ public class Keybinds implements ClientModInitializer {
             while (open_pv.consumeClick()) {
                 if (Config.apiKey.matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")) {
                     ProfileViewerUI pv = new ProfileViewerUI();
-                    pv.scheduleOpenGui(pv);
+                    pv.scheduleOpenGui(pv, Minecraft.getInstance().player.getName().getString());
                 } else {
                     ChatUtil.displayMessage("Your API key is invalid, please update it.", ChatType.ERROR);
                 }
             }
 
+            // Open Config
             while (open_config.consumeClick()){
                 Minecraft mc = Minecraft.getInstance();
                 mc.setScreen(Config.getScreen(Minecraft.getInstance().screen));
             }
-            // Open Config
         });
     }
 }
