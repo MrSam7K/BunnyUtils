@@ -13,6 +13,7 @@ public class JoinServerEvent implements ClientPlayConnectionEvents.Join {
 
     @Override
     public void onPlayReady(ClientPacketListener handler, PacketSender sender, Minecraft client) {
+        Bunnyutils.initTiers();
         if (Config.apiKey == null || Config.apiKey.isEmpty() || !Config.apiKey.matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")) {
             // API key is definitely invalid - inform user
             Bunnyutils.LOGGER.info("API key is definitely invalid");

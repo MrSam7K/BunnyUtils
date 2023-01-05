@@ -15,7 +15,14 @@ import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.Component;
 import org.slf4j.Logger;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,20 +54,9 @@ public class Bunnyutils implements ModInitializer {
     public static Component potionEffects;
     public static String actionBar;
     public static double lastElixirExchange;
-    public static String[] bfTiers = {
-            "Iron I","Iron II","Iron III","Iron IV","Iron V",
-            "Gold I","Gold II","Gold III","Gold IV","Gold V",
-            "Diamond I","Diamond II","Diamond III","Diamond IV","Diamond V",
-            "Emerald I","Emerald II","Emerald III","Emerald IV","Emerald V",
-            "Ruby I","Ruby II","Ruby III","Ruby IV","Ruby V",
-            "Jr. Bunny I","Jr. Bunny II","Jr. Bunny III","Jr. Bunny IV","Jr. Bunny V",
-            "Bunny I","Bunny II","Bunny III","Bunny IV","Bunny V",
-            "Master ⭐","Master ⭐⭐","Master ⭐⭐⭐","Master ⭐⭐⭐⭐","Master ⭐⭐⭐⭐⭐",
-            "Overlord \uD83D\uDD25","Overlord \uD83D\uDD25\uD83D\uDD25","Overlord \uD83D\uDD25\uD83D\uDD25\uD83D\uDD25","Overlord \uD83D\uDD25\uD83D\uDD25\uD83D\uDD25\uD83D\uDD25","Overlord \uD83D\uDD25\uD83D\uDD25\uD83D\uDD25\uD83D\uDD25\uD83D\uDD25",
-            "Eminence ☀","Eminence ☀☀","Eminence ☀☀☀","Eminence ☀☀☀☀","Eminence ☀☀☀☀☀",
-            "Divinity ☁","Divinity ☁☁","Divinity ☁☁☁","Divinity ☁☁☁☁","Divinity ☁☁☁☁☁",
+    public static String[] bfTiers = {};
 
-    };
+    public static String lastTier = "UNKNOWN";
 
     public static boolean movingComponents = false;
 
@@ -77,6 +73,31 @@ public class Bunnyutils implements ModInitializer {
 
         new SocketHandler();
 
+        initTiers();
         LOGGER.info("BunnyUtils finished initializing!");
+    }
+
+    public static void initTiers(){
+
+        URI uri;
+        try {
+            uri = new URI("https://raw.githubusercontent.com/MrSam7K/BU-Data/main/tiers.txt");
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        HttpRequest request = HttpRequest.newBuilder()
+                .header("Api-Key", Config.apiKey)
+                .uri(uri).build();
+        HttpResponse<String> httpResponse;
+        try {
+            httpResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        String tierData = httpResponse.body().replace("\n", "");
+        lastTier = tierData.split("-")[1];
+        bfTiers = tierData.split("-")[0].split(",");
+        System.out.println("Last Tier: " + lastTier + "\n\nbfTiers: " + Arrays.toString(bfTiers));
     }
 }
