@@ -24,12 +24,14 @@ public class TablistUpdate implements ITranslatable {
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/network/chat/Component;FFI)I"))
     private int renderBunnyUtilIcon(Font instance, PoseStack poseStack, Component playerName, float x, float y, int colorMultiplier) {
         Minecraft.getInstance().player.connection.getOnlinePlayers().forEach(playerInfo -> {
+            if (playerInfo.getTabListDisplayName() != null) {
             if (playerInfo.getTabListDisplayName().equals(playerName)) {
                 if (Bunnyutils.PLAYERS_WITH_MOD.contains(playerInfo.getProfile().getId())) {
                     // Player is using the mod
                     instance.drawShadow(poseStack, "\u2B50", x - 12, y - 3, 0xFFAA00);
                 }
             }
+        }
         });
         return instance.drawShadow(poseStack, playerName, x, y, colorMultiplier);  // Still want to render their name, just needed to get the x, y, and name
     }
