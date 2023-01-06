@@ -6,7 +6,6 @@
   "mixins": [
     "event.OptionsScreen",
     "event.ReceiveChatMessage",
-    "event.RenderEffects",
     "event.TablistUpdate",
     "event.TitleScreen"
   ],

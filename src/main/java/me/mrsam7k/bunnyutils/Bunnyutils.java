@@ -1,12 +1,15 @@
 package me.mrsam7k.bunnyutils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.event.JoinServerEvent;
 import me.mrsam7k.bunnyutils.socket.SocketHandler;
 import me.mrsam7k.bunnyutils.hud.HudManager;
+import me.mrsam7k.bunnyutils.hud.components.PotionEffectComponent;
 import me.mrsam7k.bunnyutils.hud.components.BunnyBundleComponent;
 import me.mrsam7k.bunnyutils.hud.components.TierProgressComponent;
 import net.fabricmc.api.ModInitializer;
@@ -57,6 +60,7 @@ public class Bunnyutils implements ModInitializer {
     public static String[] bfTiers = {};
 
     public static String lastTier = "UNKNOWN";
+    public static JsonObject potionColors;
 
     public static boolean movingComponents = false;
 
@@ -70,28 +74,25 @@ public class Bunnyutils implements ModInitializer {
         HudManager manager = HudManager.getInstance();
         manager.renderComponent(new TierProgressComponent());
         manager.renderComponent(new BunnyBundleComponent());
+        manager.renderComponent(new PotionEffectComponent());
 
         new SocketHandler();
 
         initTiers();
+        initPotionColors();
         LOGGER.info("BunnyUtils finished initializing!");
     }
 
     public static void initTiers(){
 
         URI uri;
-        try {
-            uri = new URI("https://raw.githubusercontent.com/MrSam7K/BU-Data/main/tiers.txt");
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        HttpRequest request = HttpRequest.newBuilder()
-                .header("Api-Key", Config.apiKey)
-                .uri(uri).build();
         HttpResponse<String> httpResponse;
         try {
+            uri = new URI("https://raw.githubusercontent.com/MrSam7K/BU-Data/main/tiers.txt");
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(uri).build();
             httpResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
 
@@ -99,5 +100,21 @@ public class Bunnyutils implements ModInitializer {
         lastTier = tierData.split("-")[1];
         bfTiers = tierData.split("-")[0].split(",");
         System.out.println("Last Tier: " + lastTier + "\n\nbfTiers: " + Arrays.toString(bfTiers));
+    }
+
+    public static void initPotionColors(){
+
+        URI uri;
+        HttpResponse<String> httpResponse;
+        try {
+            uri = new URI("https://raw.githubusercontent.com/MrSam7K/BU-Data/main/potions.json");
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(uri).build();
+            httpResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            potionColors = JsonParser.parseString(httpResponse.body()).getAsJsonObject();
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

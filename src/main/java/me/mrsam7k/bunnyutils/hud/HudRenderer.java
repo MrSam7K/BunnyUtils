@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.gui.GuiComponent;
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public final class HudRenderer implements HudRenderCallback {
@@ -14,7 +16,12 @@ public final class HudRenderer implements HudRenderCallback {
     @Override
     public void onHudRender(PoseStack matrixStack, float tickDelta) {
         for (HudComponent component : HudManager.getInstance().getComponents()) {
-            List<HudObject> objects = component.render(tickDelta);
+            List<HudObject> objects = null;
+            try {
+                objects = component.render(tickDelta);
+            } catch (URISyntaxException | IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             if (objects.isEmpty()) continue;
             int x = component.getX() + 2;
             int y = component.getY() + 2;
