@@ -63,6 +63,7 @@ public class Bunnyutils implements ModInitializer {
     public static JsonObject potionColors;
 
     public static boolean movingComponents = false;
+    public static double modVersion = 1.3;
 
     @Override
     public void onInitialize() {
@@ -117,4 +118,26 @@ public class Bunnyutils implements ModInitializer {
         }
 
     }
+
+    public static boolean updateAvailable(){
+        if(modVersion < getLatestVersion()){
+            return true;
+        }
+        return false;
+    }
+
+    public static double getLatestVersion(){
+        URI uri;
+        HttpResponse<String> httpResponse;
+        try {
+            uri = new URI("https://raw.githubusercontent.com/MrSam7K/BU-Data/main/version.txt");
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(uri).build();
+            httpResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        return Double.parseDouble(httpResponse.body());
+    }
+
 }
