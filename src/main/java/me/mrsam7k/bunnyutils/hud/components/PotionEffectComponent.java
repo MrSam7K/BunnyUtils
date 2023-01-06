@@ -25,7 +25,7 @@ public class PotionEffectComponent  extends HudComponent {
 
     @Override
     public List<HudObject> render(float tickDelta) throws URISyntaxException, IOException, InterruptedException {
-        if(!Config.potionDisplay) return new ArrayList<>();
+        if(!Config.potionDisplay || Bunnyutils.tablistFooter == null) return new ArrayList<>();
 
         ArrayList<HudObject> arrayList;
         try {
