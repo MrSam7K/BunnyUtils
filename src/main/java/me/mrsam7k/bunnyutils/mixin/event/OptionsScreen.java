@@ -22,7 +22,7 @@ public class OptionsScreen extends Screen {
     protected void init(CallbackInfo callbackInfo) {
         Minecraft mc = Minecraft.getInstance();
 
-        if (true) {
+        if (FabricLoaderImpl.INSTANCE.isModLoaded("recode")) {
             // If Recode is installed, shift button to the left
             this.addRenderableWidget(new Button(this.width / 2 - 155, this.height / 6 + 144 - 6, 150, 20, Component.literal("BunnyUtils"), (buttonWidget) -> mc.setScreen(Config.getScreen(mc.screen))));
         } else {
