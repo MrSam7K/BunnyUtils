@@ -54,7 +54,7 @@ public class TierProgressComponent extends HudComponent {
         String percentage;
         int nextTierNum;
         String nextTier;
-        if (!currentTier.equals("Divinity ☁☁☁☁☁")) {
+        if (!currentTier.equals(Bunnyutils.lastTier)) {
             nextTierNum = findIndex(Bunnyutils.bfTiers, currentTier) + 1;
             nextTier = nextTierNum == -1 ? "Failed to load" : Bunnyutils.bfTiers[nextTierNum];
 

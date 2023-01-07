@@ -2,6 +2,8 @@ package me.mrsam7k.bunnyutils.hud;
 
 import me.mrsam7k.bunnyutils.util.IntPair;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public abstract class HudComponent {
@@ -43,6 +45,6 @@ public abstract class HudComponent {
         this.y = y;
     }
 
-    public abstract List<HudObject> render(float tickDelta);
+    public abstract List<HudObject> render(float tickDelta) throws URISyntaxException, IOException, InterruptedException;
 
 }

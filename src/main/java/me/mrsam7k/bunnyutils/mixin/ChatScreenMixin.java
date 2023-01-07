@@ -9,7 +9,6 @@ import net.minecraft.client.GuiMessage;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.FormattedCharSequence;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,7 +31,10 @@ public class ChatScreenMixin extends Screen {
     @Inject(method = "render", at = @At("RETURN"))
     public void render(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (minecraft == null) return;
-        if (!Config.chatTabs) { setMesssages(Bunnyutils.GLOBAL_CHAT); return; }
+        if (!Config.chatTabs) {
+            setMesssages(Bunnyutils.GLOBAL_CHAT);
+            return;
+        }
 
         int offset = 0;
         buttons.clear();
@@ -46,12 +48,12 @@ public class ChatScreenMixin extends Screen {
     private int chatButton(PoseStack poseStack, int id, String name, boolean selected, int offset) {
         int nameWidth = minecraft.font.width(name);
         int x = 2 + offset;
-        int y = this.height - 51 - minecraft.gui.getChat().getHeight();
+        int y = this.height - 15 - this.font.lineHeight;
         int x2 = 4 + nameWidth + offset;
-        int y2 = this.height + minecraft.font.lineHeight - 50 - minecraft.gui.getChat().getHeight();
+        int y2 = this.height - 14;
         fill(poseStack, x, y, x2, y2,
                 selected ? this.minecraft.options.getBackgroundColor(Integer.MIN_VALUE) / 2 : this.minecraft.options.getBackgroundColor(Integer.MIN_VALUE));
-        drawString(poseStack, minecraft.font, name, 3 + offset, this.height - 50 - minecraft.gui.getChat().getHeight(), 0xFFFFFF);
+        drawString(poseStack, minecraft.font, name, 3 + offset, y + 1, 0xFFFFFF);
 
         buttons.add(new ChatButtonInformation(id, x, y, x2, y2));
 
@@ -80,8 +82,8 @@ public class ChatScreenMixin extends Screen {
         }
     }
 
-    private void setMesssages(List<GuiMessage<FormattedCharSequence>> messages) {
-        List<GuiMessage<FormattedCharSequence>> trimmedMessages = ((ChatComponentAccessor) minecraft.gui.getChat()).getTrimmedMessages();
+    private void setMesssages(List<GuiMessage.Line> messages) {
+        List<GuiMessage.Line> trimmedMessages = ((ChatComponentAccessor) minecraft.gui.getChat()).getTrimmedMessages();
         trimmedMessages.clear();
         if (messages != null) trimmedMessages.addAll(messages);
     }
