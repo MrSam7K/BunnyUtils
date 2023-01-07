@@ -1,6 +1,8 @@
 package me.mrsam7k.bunnyutils.mixin.event;
 
 import me.mrsam7k.bunnyutils.config.Config;
+import net.fabricmc.loader.impl.FabricLoaderImpl;
+import net.fabricmc.loader.impl.util.LoaderUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -21,6 +23,11 @@ public class OptionsScreen extends Screen {
     protected void init(CallbackInfo callbackInfo) {
         Minecraft mc = Minecraft.getInstance();
 
-        this.addRenderableWidget(new Button(this.width / 2 - 75, this.height / 6 + 144 - 6, 150, 20, Component.literal("BunnyUtils"), (buttonWidget) -> mc.setScreen(Config.getScreen(mc.screen))));
+        if (true) {
+            // If Recode is installed, shift button to the left
+            this.addRenderableWidget(new Button(this.width / 2 - 155, this.height / 6 + 144 - 6, 150, 20, Component.literal("BunnyUtils"), (buttonWidget) -> mc.setScreen(Config.getScreen(mc.screen))));
+        } else {
+            this.addRenderableWidget(new Button(this.width / 2 - 75, this.height / 6 + 144 - 6, 150, 20, Component.literal("BunnyUtils"), (buttonWidget) -> mc.setScreen(Config.getScreen(mc.screen))));
+        }
     }
 }

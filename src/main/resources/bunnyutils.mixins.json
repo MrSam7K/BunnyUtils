@@ -13,7 +13,8 @@
     "ChatComponentAccessor",
     "ChatComponentMixin",
     "ChatScreenMixin",
-    "MidnightConfigMixin"
+    "MidnightConfigMixin",
+    "RecodeFix",
   ],
   "injectors": {
     "defaultRequire": 1
