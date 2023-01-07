@@ -1,4 +1,4 @@
-package me.mrsam7k.bunnyutils.config;
+package me.mrsam7k.bunnyutils.util;
 
 import net.minecraft.network.chat.Component;
 

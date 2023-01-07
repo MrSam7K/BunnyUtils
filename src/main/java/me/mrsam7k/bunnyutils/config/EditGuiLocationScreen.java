@@ -13,6 +13,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class EditGuiLocationScreen extends Screen {
@@ -43,7 +45,12 @@ public class EditGuiLocationScreen extends Screen {
         int oldY = (int) (mouseY-deltaY);
 
         for (HudComponent component : HudManager.getInstance().getComponents()) {
-            List<HudObject> objects = component.render(0);
+            List<HudObject> objects = null;
+            try {
+                objects = component.render(0);
+            } catch (URISyntaxException | InterruptedException | IOException e) {
+                throw new RuntimeException(e);
+            }
             int x = component.getX() + 2;
             int y = component.getY() + 2;
             int largestWidth = 0;
@@ -80,7 +87,12 @@ public class EditGuiLocationScreen extends Screen {
             renderDirtBackground(0);
 
             for (HudComponent component : HudManager.getInstance().getComponents()) {
-                List<HudObject> objects = component.render(delta);
+                List<HudObject> objects = null;
+                try {
+                    objects = component.render(delta);
+                } catch (URISyntaxException | IOException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 if (objects.isEmpty()) continue;
                 
                 int x = component.getX() + 2;
