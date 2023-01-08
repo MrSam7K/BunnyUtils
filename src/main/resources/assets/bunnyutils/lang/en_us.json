@@ -15,5 +15,6 @@
   "BunnyUtils.midnightconfig.chatTabs": "Chat Tabs",
   "BunnyUtils.midnightconfig.elixirExchangeNotif": "Elixir Exchange Notification - Sends a notification when you are able to exchange elixir",
   "BunnyUtils.midnightconfig.potionDisplay": "Potion Display - Displays active potion effects",
+  "BunnyUtils.midnightconfig.minibossCounter": "Miniboss Counter - Displays miniboss counter right on your screen!",
   "BunnyUtils.midnightconfig.bfButton": "BunnyFarm Button - Adds button to title screen which joins BunnyFarm"
 }

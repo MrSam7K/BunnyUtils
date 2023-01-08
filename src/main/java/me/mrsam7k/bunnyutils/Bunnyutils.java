@@ -7,6 +7,7 @@ import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.event.JoinServerEvent;
+import me.mrsam7k.bunnyutils.hud.components.MinibossCounterComponent;
 import me.mrsam7k.bunnyutils.socket.SocketHandler;
 import me.mrsam7k.bunnyutils.hud.HudManager;
 import me.mrsam7k.bunnyutils.hud.components.PotionEffectComponent;
@@ -54,8 +55,8 @@ public class Bunnyutils implements ModInitializer {
     public static boolean lastGG;
     public static boolean vanished;
     public static Component tablistFooter;
-    public static Component potionEffects;
     public static String actionBar;
+    public static String minibossCounter = "";
     public static double lastElixirExchange;
     public static String[] bfTiers = {};
 
@@ -76,6 +77,7 @@ public class Bunnyutils implements ModInitializer {
         manager.renderComponent(new TierProgressComponent());
         manager.renderComponent(new BunnyBundleComponent());
         manager.renderComponent(new PotionEffectComponent());
+        manager.renderComponent(new MinibossCounterComponent());
 
         new SocketHandler();
 

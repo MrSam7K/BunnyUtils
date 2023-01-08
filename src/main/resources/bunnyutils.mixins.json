@@ -7,14 +7,15 @@
     "event.OptionsScreen",
     "event.ReceiveChatMessage",
     "event.TablistUpdate",
-    "event.TitleScreen"
+    "event.TitleScreen",
+    "event.RenderNameTag"
   ],
   "client": [
     "ChatComponentAccessor",
     "ChatComponentMixin",
     "ChatScreenMixin",
     "MidnightConfigMixin",
-    "RecodeFix",
+    "RecodeFix"
   ],
   "injectors": {
     "defaultRequire": 1

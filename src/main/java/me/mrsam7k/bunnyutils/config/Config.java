@@ -15,6 +15,7 @@ public class Config extends MidnightConfig {
     @Entry public static bundleOptions bundleProgress = bundleOptions.OFF;
     public enum bundleOptions { OFF, ACTION_BAR, WINDOW }
     @Entry public static boolean potionDisplay = false;
+    @Entry public static boolean minibossCounter = false;
     @Entry public static boolean chatTabs = true;
     @Entry public static boolean bfButton = true;
 
