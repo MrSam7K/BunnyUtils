@@ -1,22 +1,18 @@
 package me.mrsam7k.bunnyutils.hud.components;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import me.mrsam7k.bunnyutils.Bunnyutils;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.hud.HudComponent;
 import me.mrsam7k.bunnyutils.hud.HudObject;
 import me.mrsam7k.bunnyutils.hud.objects.HudString;
+
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PotionEffectComponent  extends HudComponent {
+public class PotionEffectComponent extends HudComponent {
     public PotionEffectComponent() {
         super("potion_effects");
         this.x = 5;
