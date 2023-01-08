@@ -44,7 +44,7 @@ public class ProfileViewerUI extends LightweightGuiDescription implements IMenu 
                 return;
             }
         } catch (Exception ex) {
-            ChatUtil.displayMessage("Something went wrong, you probably got rate-limited by Mojang.\n\n" + ex, ChatType.ERROR);
+            ChatUtil.displayMessage("Something went wrong...", ChatType.ERROR);
             return;
         }
         JsonObject json = JsonParser.parseString(UUIDJson).getAsJsonObject();
