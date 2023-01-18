@@ -32,7 +32,7 @@ public class ChatScreenMixin extends Screen {
     public void render(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (minecraft == null) return;
         if (!Config.chatTabs) {
-            setMesssages(Bunnyutils.GLOBAL_CHAT);
+            setMessages(Bunnyutils.GLOBAL_CHAT);
             return;
         }
 
@@ -66,7 +66,7 @@ public class ChatScreenMixin extends Screen {
             if (ScreenUtil.hovering(mouseX, mouseY, information.x1(), information.y1(), information.x2(), information.y2())) {
                 Bunnyutils.chatSelected = information.id();
 
-                setMesssages(switch (Bunnyutils.chatSelected) {
+                setMessages(switch (Bunnyutils.chatSelected) {
                     case 0 -> Bunnyutils.GLOBAL_CHAT;
                     case 1 -> Bunnyutils.PUBLIC_CHAT;
                     case 2 -> Bunnyutils.PRIVATE_CHAT;
@@ -82,7 +82,7 @@ public class ChatScreenMixin extends Screen {
         }
     }
 
-    private void setMesssages(List<GuiMessage.Line> messages) {
+    private void setMessages(List<GuiMessage.Line> messages) {
         List<GuiMessage.Line> trimmedMessages = ((ChatComponentAccessor) minecraft.gui.getChat()).getTrimmedMessages();
         trimmedMessages.clear();
         if (messages != null) trimmedMessages.addAll(messages);
