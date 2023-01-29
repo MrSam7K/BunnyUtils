@@ -8,6 +8,7 @@ group = project.maven_group
 
 repositories {
     maven { url = "https://api.modrinth.com/maven" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -21,6 +22,9 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    include 'com.github.JnCrMx:discord-game-sdk4j:v0.5.5'
+    implementation 'com.github.JnCrMx:discord-game-sdk4j:v0.5.5'
 }
 
 processResources {

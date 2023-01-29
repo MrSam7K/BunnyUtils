@@ -3,6 +3,8 @@ package me.mrsam7k.bunnyutils.config;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.client.gui.screens.Screen;
 
+import java.util.List;
+
 public class Config extends MidnightConfig {
 
     @Comment(centered = true) public static Comment fillerComment;
@@ -23,6 +25,9 @@ public class Config extends MidnightConfig {
     @Entry public static String apiKey = "";
     @Entry public static boolean elixirExchangeNotif = false;
     @Entry(name = "Adjust Overlay Background Opacity", isSlider = true, min = 0, max = 100) public static int intSlider = 50;
+    @Comment(centered = true) public static Comment discordRPCCategory;
+    @Entry public static String dcFirstLine = "{location}";
+    @Entry public static String dcSecLine = "{player} - {points}";
 
     public static Screen getScreen(Screen parent){
         return MidnightConfig.getScreen(parent, "BunnyUtils");

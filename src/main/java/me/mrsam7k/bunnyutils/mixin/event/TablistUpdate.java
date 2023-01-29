@@ -18,6 +18,7 @@ public class TablistUpdate implements ITranslatable {
 
     @Inject(at = @At("RETURN"), method = "setFooter")
     private void getTablist(Component component, CallbackInfo ci) {
+        Bunnyutils.discordPresence.put("tier", component.getString().split("\n")[1].split(": ")[1]);
         Bunnyutils.tablistFooter = component;
     }
 

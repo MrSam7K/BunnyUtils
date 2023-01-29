@@ -7,12 +7,12 @@ import com.mojang.logging.LogUtils;
 import eu.midnightdust.lib.config.MidnightConfig;
 import me.mrsam7k.bunnyutils.config.Config;
 import me.mrsam7k.bunnyutils.event.JoinServerEvent;
-import me.mrsam7k.bunnyutils.hud.components.MinibossCounterComponent;
-import me.mrsam7k.bunnyutils.socket.SocketHandler;
 import me.mrsam7k.bunnyutils.hud.HudManager;
-import me.mrsam7k.bunnyutils.hud.components.PotionEffectComponent;
 import me.mrsam7k.bunnyutils.hud.components.BunnyBundleComponent;
+import me.mrsam7k.bunnyutils.hud.components.MinibossCounterComponent;
+import me.mrsam7k.bunnyutils.hud.components.PotionEffectComponent;
 import me.mrsam7k.bunnyutils.hud.components.TierProgressComponent;
+import me.mrsam7k.bunnyutils.socket.SocketHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.GuiMessage;
@@ -25,10 +25,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Bunnyutils implements ModInitializer {
 
@@ -66,6 +63,11 @@ public class Bunnyutils implements ModInitializer {
     public static boolean movingComponents = false;
     public static double modVersion = 1.3;
 
+
+     //location, lastUsed, points, stars, elixir, slimeballs, prestige, tier, player
+    public static Map<String, String> discordPresence = new HashMap<>();
+
+
     @Override
     public void onInitialize() {
         LOGGER.info("BunnyUtils is initializing!");
@@ -83,6 +85,9 @@ public class Bunnyutils implements ModInitializer {
 
         initTiers();
         initPotionColors();
+        for(Map.Entry<String, String> entry : discordPresence.entrySet()){
+            discordPresence.put(entry.getKey(), "Unknown");
+        }
         LOGGER.info("BunnyUtils finished initializing!");
     }
 
